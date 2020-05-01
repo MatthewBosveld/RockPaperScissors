@@ -7,49 +7,82 @@
 </head>
 <body>
     <script>
+        alert("Let's play a game...");
+        let name = prompt("First... what is your name?")
+
         let computerScore = 0;
         let playerScore = 0;
-
+        let remainingRounds = 5;
+        
         function computerPlay() { 
             let possibleSelection = ["rock", "paper", "scissors"];
             return computerPick = possibleSelection[Math.floor(Math.random() * possibleSelection.length)];
         }
 
-        function playRound(playerSelection, computerSelection){
+        function playRound(){
+            let computerSelection = computerPlay();
+        let playerSelection = prompt("Rock, paper or scissors?").toLowerCase();
             if (playerSelection === computerSelection) {
-                return "It's a draw! Let's go again!"
+                remainingRounds--;
+                return "It's a draw! Let's go again!";
             } else if (playerSelection === "rock" && computerSelection === "paper") {
-                return "Paper beats rock, you lose! Just like with Shithead and Beverbende. Unlucky!"
+                computerScore++;
+                remainingRounds--;
+                return "Paper beats rock, you lose! Just like with Shithead and Beverbende. Unlucky!";
             } else if (playerSelection === "rock" && computerSelection === "scissors") {
-                return "Rock beats scissors, you win! You got lucky."
+                playerScore++;
+                remainingRounds--;
+                return "Rock beats scissors, you win! You got lucky.";
             } else if (playerSelection === "paper" && computerSelection === "rock") {
-                return "Paper beats rock, win! You got lucky."
+                playerScore++;
+                remainingRounds--;
+                return "Paper beats rock, win! You got lucky.";
             } else if (playerSelection === "paper" && computerSelection === "scissors") {
-                return "Scissors beats paper, you lose! Just like with Shithead and Beverbende. Unlucky!"
+                computerScore++;
+                remainingRounds--;
+                return "Scissors beats paper, you lose! Just like with Shithead and Beverbende. Unlucky!";
             } else if (playerSelection === "scissors" && computerSelection === "paper") {
-                return "Scissors beat paper, you win! You got lucky."
+                playerScore++;
+                remainingRounds--;
+                return "Scissors beat paper, you win! You got lucky.";
             } else if (playerSelection === "scissors" && computerSelection === "rock") {
-                return "Rock beats scissors, you lose! Just like with Shithead and Beverbende. Unlucky!"
+                computerScore++;
+                remainingRounds--;
+                return "Rock beats scissors, you lose! Just like with Shithead and Beverbende. Unlucky!";
             } else {
-                return "Something went wrong..."
-            }
+                return "Something went wrong... Make sure to pick rock, paper or scissors. I won't count this one.";
+            } 
         }
 
-        let computerSelection = computerPlay();
-        let playerSelection = prompt("rock, paper or scissors?").toLowerCase();
-
-        function game() {
-            console.log(playRound(playerSelection, computerSelection));
-            console.log(playRound(playerSelection, computerSelection));
-            console.log(playRound(playerSelection, computerSelection));
-            console.log(playRound(playerSelection, computerSelection));
-            console.log(playRound(playerSelection, computerSelection));
+        function displayScores() {
+            console.log("Your score:", playerScore);
+            console.log("Computer's score:", computerScore);
         }
 
-        game();
+
+function game() {
+    while (remainingRounds >0) {
+        console.log(playRound());
+        displayScores(); 
 
         
+        }
+    if (playerScore > computerScore) {
+        console.log(`Fine, ${name}, you won, but you were lucky!`);
+    } else if (computerScore > playerScore) {
+        console.log(`Hahaha, you're such a loser, ${name}!`);
+    } else {
+        console.log(`Oh no, it's a draw!? Well, ${name}, we'll need to go again...`);
+    }
+    }
 
+game();
+
+//LEARNED:
+// Function call doesn't work because return does not get printed. Console log needed for playRound. 
+// Encountered effects of the scope with the score and remaining rounds variables
+// Manipulating variables (in some cases) and functions depending on the values of these variables
+// Conditionals
 
     </script>
 </body>
